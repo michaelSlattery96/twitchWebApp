@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import api from '../api';
+import {resize} from './Resize';
+import StreamTemplate from './StreamTemplate';
 
 function GameStreams({match, location}) {
 
@@ -13,10 +15,7 @@ function GameStreams({match, location}) {
       );
       let dataArray = result.data.data;
       let finalArray = dataArray.map(stream => {
-        let newURL = stream.thumbnail_url
-          .replace("{width}", "300")
-          .replace("{height}", "300")
-        stream.thumbnail_url = newURL;
+        stream.thumbnail_url = resize(stream.thumbnail_url);
         return stream;
       }, []);
       let totalViewers = finalArray.reduce((accum, value) => {
@@ -36,29 +35,7 @@ function GameStreams({match, location}) {
         <strong className='text-primary'>{viewers}</strong> people currently
         watching {match.params.name}
       </h3>
-      <div className='row'>
-        {streamData.map(stream => (
-          <div className='col-lg-4 col-md-6 col-sm-12 mt-5'>
-            <div className='card text-center'>
-              <img className='card-img-top' src={stream.thumbnail_url}/>
-              <div className='card-body'>
-                <h5 className='card-title'>{stream.user_name}<  /h5>
-                <div className='card-text'>
-                  {stream.viewer_count} live viewers
-                </div>
-                <button className='btn btn-success'>
-                  <a
-                    className='link'
-                    href={'https://twitch.tv/' + stream.user_name}
-                    target='_blank'>
-                    watch {stream.user_name}'s channel
-                  </a>
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      {StreamTemplate(streamData)}
     </div>
   );
 }

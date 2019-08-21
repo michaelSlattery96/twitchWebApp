@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import api from '../api';
+import {resize} from './Resize';
 
 function Games() {
 
@@ -11,10 +12,7 @@ function Games() {
       const result = await api.get("https://api.twitch.tv/helix/games/top");
       let dataArray = result.data.data;
       let finalArray = dataArray.map(game => {
-        let newURL = game.box_art_url
-          .replace("{width}", "300")
-          .replace("{height}", "300")
-        game.box_art_url = newURL;
+        game.box_art_url = resize(game.box_art_url);
         return game;
       })
       setGames(result.data.data);
