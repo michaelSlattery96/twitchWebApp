@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function StreamTemplate(streams) {
   return (
@@ -14,12 +15,12 @@ function StreamTemplate(streams) {
                 {stream.viewer_count} live viewers
               </div>
               <button className='btn btn-success'>
-                <a
-                  className='link'
-                  href={'https://twitch.tv/' + stream.user_name}
-                  target='_blank'>
-                  watch {stream.user_name}'s channel
-                </a>
+                <Link className='link' to={{
+                  pathname: "profile/" + stream.user_name,
+                  state: { channel: stream.user_name }
+                }}>
+                watch {stream.user_name}'s channel
+                </Link>
               </button>
             </div>
           </div>

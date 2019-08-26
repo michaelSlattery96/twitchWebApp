@@ -4,6 +4,7 @@ import Games from './components/Games';
 import Header from './components/Header';
 import Streams from './components/Streams';
 import GameStreams from './components/GameStreams';
+import UserStream from './components/UserStream';
 import ReactDOM from 'react-dom';
 
 import './styles.css';
@@ -18,6 +19,7 @@ function App() {
       <Route exact path = '/' component={Games} />
       <Route exact path = '/top-streams' component={Streams} />
       <Route exact path = '/game/:name' component={GameStreams} />
+      <Route exact path = '/profile/:name' component={UserStream} />
     </Router>
   );
 }
