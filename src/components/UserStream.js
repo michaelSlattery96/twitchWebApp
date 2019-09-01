@@ -1,34 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 function UserStream(props) {
 
   const EMBED_URL = 'https://embed.twitch.tv/embed/v1.js';
 
-  const script = document.createElement('script');
-  script.setAttribute(
-    'src',
-    EMBED_URL
-  );
-  script.addEventListener('load', () => {
-    new window.Twitch.Embed("twitch-embed",
-      {
-        width: '1600',
-        height: '800',
-        channel: props.location.state.channel
-      }
+  let embed;
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.setAttribute(
+      'src',
+      EMBED_URL
     );
+    script.addEventListener('load', () => {
+      embed = new window.Twitch.Embed('twitch-embed',
+        {
+          width: "100%",
+          height: "100%",
+          channel: props.location.state.channel
+        }
+      );
+    });
+    document.body.appendChild(script);
   });
-  document.body.appendChild(script);
 
   return (
-    <div id={props.targetID}></div>
+    <div class='center' id='twitch-embed'></div>
   );
-}
-
-UserStream.defaultProps = {
-  targetID: 'twitch-embed',
-  width: '1600',
-  height: '800',
 }
 
 export default UserStream;
