@@ -10,3 +10,11 @@
 .link:hover {
   color: #fff;
 }
+
+.center {
+  left:15%;
+  width:75%;
+  height:75%;
+  position:absolute;
+  text-align: center;
+}
