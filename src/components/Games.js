@@ -24,7 +24,7 @@ function Games() {
       <h1>Most Popular Games</h1>
       <div className='row'>
         {games.map(topGame => (
-          <div className='col-lg-4 col-md-6 col-sm-12 mt-5'>
+          <div className='col-lg-2 col-md-4 col-sm-6 mt-5'>
             <div className='card text-center'>
               <img className='card-img-top' src={topGame.box_art_url}/>
               <div className='card-body'>
@@ -34,7 +34,7 @@ function Games() {
                     pathname: 'game/' + topGame.name,
                     state:  {gameID: topGame.id}
                   }}>
-                  {topGame.name} streams{" "}
+                  watch now
                   </Link>
                 </button>
               </div>

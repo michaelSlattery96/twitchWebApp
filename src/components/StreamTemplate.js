@@ -5,7 +5,7 @@ function StreamTemplate(streams) {
   return (
     <div className='row'>
       {streams.map(stream => (
-        <div className='col-lg-4 col-md-6 col-sm-12 mt-5'>
+        <div className='col-lg-2 col-md-4 col-sm-6 mt-5'>
           <div className='card text-center'>
             <img className='card-img-top' src={stream.thumbnail_url}/>
             <div className='card-body'>
@@ -19,7 +19,7 @@ function StreamTemplate(streams) {
                   pathname: "profile/" + stream.user_name,
                   state: { channel: stream.user_name }
                 }}>
-                watch {stream.user_name}'s channel
+                watch now
                 </Link>
               </button>
             </div>
