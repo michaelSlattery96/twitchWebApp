@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import api from '../api';
+import helixApi from '../helixApi';
 import {resize} from './Resize';
 
 function Games() {
@@ -9,13 +9,13 @@ function Games() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await api.get("https://api.twitch.tv/helix/games/top");
+      const result = await helixApi.get("https://api.twitch.tv/helix/games/top");
       let dataArray = result.data.data;
       let finalArray = dataArray.map(game => {
         game.box_art_url = resize(game.box_art_url);
         return game;
       })
-      setGames(result.data.data);
+      setGames(finalArray);
     };
     fetchData();
   }, []);
@@ -32,7 +32,7 @@ function Games() {
                 <button className='btn btn-success'>
                   <Link className='link' to={{
                     pathname: 'game/' + topGame.name,
-                    state:  {gameID: topGame.id}
+                    state:  {gameName: topGame.name}
                   }}>
                   watch now
                   </Link>

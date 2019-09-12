@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import api from '../api';
+import krakenApi from '../krakenApi';
 import {resize} from './Resize';
 import StreamTemplate from './StreamTemplate';
 
@@ -10,16 +10,16 @@ function GameStreams({match, location}) {
 
   useEffect(() =>{
     const fetchData = async () => {
-      const result = await api.get(
-        `https://api.twitch.tv/helix/streams?game_id=${location.state.gameID}`
+      const result = await krakenApi.get(
+        `https://api.twitch.tv/kraken/streams/?game=${location.state.gameName}`
       );
-      let dataArray = result.data.data;
+      let dataArray = result.data.streams;
       let finalArray = dataArray.map(stream => {
-        stream.thumbnail_url = resize(stream.thumbnail_url);
+        stream.preview.template = resize(stream.preview.template);
         return stream;
       }, []);
       let totalViewers = finalArray.reduce((accum, value) => {
-        return accum + value.viewer_count;
+        return accum + value.viewers;
       }, 0) ;
 
       setViewers(totalViewers);
