@@ -18,3 +18,13 @@
   position:absolute;
   text-align: center;
 }
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row {
+  padding: 1%;
+}
